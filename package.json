@@ -27,6 +27,7 @@
     "framer-motion": "^6.5.1",
     "fs": "^0.0.1-security",
     "next": "latest",
+    "node-gyp": "^9.1.0",
     "prisma": "^4.1.0",
     "query-string": "^7.1.1",
     "react": "^18.2.0",
