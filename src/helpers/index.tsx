@@ -1,6 +1,6 @@
 import { ChartConfiguration } from "chart.js";
 import { ChartJSNodeCanvas } from "chartjs-node-canvas";
-import { Image, loadImage } from "canvas";
+import { loadImage } from "canvas";
 import { NextApiRequest } from "next";
 
 export const isValidChartSize = (size: string): true | never => {
@@ -50,7 +50,6 @@ export const createImage = async (
         },
       },
     },
-
     plugins,
   };
 
