@@ -1,7 +1,17 @@
 import { Heading } from "@chakra-ui/layout";
-import { Center, Title, Text, Image, Box, Code, Button } from "@mantine/core";
+import {
+  Center,
+  Title,
+  Text,
+  Image,
+  Box,
+  Code,
+  Button,
+  Anchor,
+} from "@mantine/core";
 import { useClipboard } from "@mantine/hooks";
 import { showNotification } from "@mantine/notifications";
+import { useRouter } from "next/router";
 import React from "react";
 import { getEnvironmentUrl, isInProduction } from "../../../../helpers";
 import { phoneWidth, tabletWidth } from "../../../../utils";
@@ -9,7 +19,7 @@ import customNotification from "../../../reusables/customNotification";
 
 const Landing = () => {
   const clipboard = useClipboard();
-
+  const router = useRouter();
   return (
     <Center
       sx={{
@@ -45,9 +55,11 @@ const Landing = () => {
       </Heading>
       <Center sx={{ flexDirection: "column" }}>
         {/* <pre style={{ background: "red", margin: "0 auto", width: "50%" }}> */}
-        <Button color="violet" mt="2.5%" radius="xl" size="xl">
-          Get started now
-        </Button>
+        <Anchor mt={10} href="/app">
+          <Button color="violet" mt="2.5%" radius="xl" size="xl">
+            Start making charts
+          </Button>
+        </Anchor>
         <Code
           mt="3%"
           onClick={() => {

@@ -17,7 +17,7 @@ const AppPage = () => {
   return (
     <Page setPage={setPages}>
       {pages.home && <ChartCreator />}
-      {pages.docs && <Docs />}
+      {/* {pages.docs && <Docs />} */}
       {pages.charts && <MyCharts />}
     </Page>
   );

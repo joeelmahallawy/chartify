@@ -76,7 +76,7 @@ const HomePageHeader = () => {
           gap={10}
           display={["none", "none", "flex", "flex", "flex", "flex"]}
         >
-          <Text
+          {/* <Text
             color="black"
             fontWeight={500}
             onClick={() => {
@@ -88,34 +88,46 @@ const HomePageHeader = () => {
             }}
             fontSize="lg"
             _hover={{ cursor: "pointer" }}
-          >
+          > 
             Docs
-          </Text>
-          <Text
+          </Text> */}
+          {/* <Text
             color="black"
             fontWeight={500}
-            onClick={() => router.push("/dashboard")}
+            // onClick={() => router.push("/dashboard")}
+
             fontSize="lg"
             _hover={{ cursor: "pointer" }}
           >
-            Get started
-          </Text>
-          <Text
-            color="black"
-            onClick={() => router.push("/pricing")}
-            fontWeight={500}
-            fontSize="lg"
-            _hover={{ cursor: "pointer" }}
-          >
-            Pricing
-          </Text>
+            <Anchor href="/app">Get started</Anchor>
+          </Text> */}
+
           <Text
             color="black"
             fontWeight={500}
             fontSize="lg"
             _hover={{ cursor: "pointer" }}
+            onClick={() =>
+              window.scrollTo({ left: 0, top: 0, behavior: "smooth" })
+            }
           >
-            <a href="mailto:">Contact us</a>
+            Home
+          </Text>
+          <Text
+            color="black"
+            fontWeight={500}
+            fontSize="lg"
+            _hover={{ cursor: "pointer" }}
+          >
+            <a href="/app">Get started</a>
+          </Text>
+          <Text
+            color="black"
+            fontWeight={500}
+            fontSize="lg"
+            _hover={{ cursor: "pointer" }}
+          >
+            <a href="mailto:youssef.elmahallawy01@gmail.com">Contact us</a>
           </Text>
         </ChakraCenter>
         <ChakraCenter
@@ -135,9 +147,9 @@ const HomePageHeader = () => {
             </Text>
           </Anchor> */}
 
-          <Anchor href="/login">
+          <Anchor href="/app">
             <Button color="pink" radius="xl" size="md">
-              <Text fontSize="lg">Sign Up</Text>
+              <Text fontSize="lg">Join now</Text>
             </Button>
           </Anchor>
         </ChakraCenter>

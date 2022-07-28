@@ -21,6 +21,7 @@ export const isEmpty = (str: string | undefined) =>
   str?.replaceAll(" ", "").length === 0;
 
 const ChartCreator = () => {
+  const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [opened, setOpened] = useState(false);
 
@@ -65,6 +66,7 @@ const ChartCreator = () => {
         <form
           style={{ marginTop: "1%" }}
           onSubmit={form.onSubmit(async (values) => {
+            setLoading(true);
             const response = await fetch(
               `/api/chart?configs=${values.configs}${
                 // add background image of chart
@@ -78,11 +80,12 @@ const ChartCreator = () => {
                   : `&bg=${values.backgroundColor}`
               }&size=${values.width}x${values.height}`
             );
+
             // convert to blob so we can show the image
             const chartBlob = await response.blob();
 
             // turn to text so we can check if there was a possible error in the creation
-
+            setLoading(false);
             const url = URL.createObjectURL(chartBlob);
 
             setImage(
@@ -160,7 +163,12 @@ const ChartCreator = () => {
               {...form.getInputProps("height")}
             />
           </Center>
-          <Button mr={15} type="submit" color="blue">
+          <Button
+            mr={15}
+            type="submit"
+            loading={loading && !isLoading}
+            color="blue"
+          >
             Generate
           </Button>
           <Modal
@@ -223,7 +231,13 @@ const ChartCreator = () => {
                     setNameOfChart(e.currentTarget.value);
                   }}
                 />
-                <Button type="submit" fullWidth ml="auto" mt={10}>
+                <Button
+                  type="submit"
+                  fullWidth
+                  ml="auto"
+                  loading={isLoading}
+                  mt={10}
+                >
                   Save
                 </Button>
               </Box>
