@@ -10,6 +10,7 @@ import { NotificationsProvider } from "@mantine/notifications";
 import icon from "../../assets/chartify.png";
 
 import { GoogleAnalytics, usePageViews } from "nextjs-google-analytics";
+import Script from "next/script";
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
@@ -25,6 +26,18 @@ export default function App(props: AppProps) {
         />
         <link rel="shortcut icon" href={icon.src} sizes="16x16"></link>
       </Head>
+
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=UA-235997113-1"
+      ></Script>
+      <Script>
+        {`window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-235997113-1');`}
+      </Script>
 
       <MantineProvider
         withGlobalStyles
