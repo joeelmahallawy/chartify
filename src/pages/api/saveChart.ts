@@ -75,7 +75,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     );
     await client.disconnect();
 
-    await fs.writeFileSync(`./public/charts/${key}.png`, data);
+    // await fs.writeFileSync(`./public/charts/${key}.png`, data);
     res.json({ id: key });
   } catch (error) {
     res.json({ error: error.message });

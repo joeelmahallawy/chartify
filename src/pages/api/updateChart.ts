@@ -52,7 +52,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           backgroundPlugin(params.get("bg") as string)
         : backgroundPlugin()
     );
-    await fs.writeFileSync(`./public/charts/${id}.png`, data);
+    // await fs.writeFileSync(`./public/charts/${id}.png`, data);
     await client.set(id, `${getEnvironmentUrl()}${configs}`);
     await client.disconnect();
     res.json({ success: true });

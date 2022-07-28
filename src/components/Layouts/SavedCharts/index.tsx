@@ -22,6 +22,7 @@ import {
 import { isEmpty } from "../ChartCreator";
 import customNotification from "../../reusables/customNotification";
 import { useClipboard } from "@mantine/hooks";
+import { Clipboard, ClipboardCheck } from "tabler-icons-react";
 
 const MyCharts = () => {
   const clipboard = useClipboard();
@@ -187,27 +188,37 @@ const MyCharts = () => {
           })}
         >
           <Text mb={5}>Grab your chart from this url:</Text>
-          <Code
-            p={7}
-            onClick={() => {
-              clipboard.copy(
-                `${getEnvironmentUrl()}/charts/${
-                  state?.value?.data[currentChartOpen]?.key
-                }.png`
-              );
-              return customNotification("Copied to clipboard", "", "green");
-            }}
-            sx={(theme) => ({
-              "&:hover": {
-                background: theme.colors.gray[2],
-                cursor: "pointer",
-              },
-            })}
-          >
-            {`${getEnvironmentUrl()}/charts/${
-              state?.value?.data[currentChartOpen]?.key
-            }.png`}
-          </Code>
+          <Center>
+            <Code
+              p={7}
+              onClick={() => {
+                clipboard.copy(
+                  // `${getEnvironmentUrl()}/charts/${
+                  //   state?.value?.data[currentChartOpen]?.key
+                  // }.png`
+
+                  state?.value?.data[currentChartOpen]?.value
+                );
+                return customNotification("Copied to clipboard", "", "green");
+              }}
+              sx={(theme) => ({
+                "&:hover": {
+                  background: theme.colors.gray[2],
+                  cursor: "pointer",
+                },
+              })}
+            >
+              {console.log(state?.value?.data[currentChartOpen]?.value)}
+              {`${getEnvironmentUrl()}/charts/${
+                state?.value?.data[currentChartOpen]?.value
+              }`}
+            </Code>
+            {!clipboard.copied ? (
+              <Clipboard size={50} style={{ marginLeft: "auto" }} />
+            ) : (
+              <ClipboardCheck size={50} style={{ marginLeft: "auto" }} />
+            )}
+          </Center>
           <TextInput
             mt={10}
             label="Chart name"

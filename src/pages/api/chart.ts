@@ -30,22 +30,22 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     // NOTE: this is for edge cases when we have a image that can't be supported, we save it in our project then use it by referencing the file directory
-    if (req.headers.retry == "1") {
-      // create image
-      const data = await axios.get(req.query.img as string);
+    // if (req.headers.retry == "1") {
+    //   // create image
+    //   const data = await axios.get(req.query.img as string);
 
-      // const data = await response.arrayBuffer();
-      // const blob = new Blob(data.data);
-      // const arrayBuffer = await blob.arrayBuffer();
-      const buf = Buffer.from(data.data, "binary");
-      // const blob = new Blob([data.data]);
-      await fs.writeFileSync(
-        `./public/invalidImages/${req.headers.id}.png`,
-        buf
-      );
-      // then set that as the directory for creating image
-      req.query.img = `./public/invalidImages/${req.headers.id}.png`;
-    }
+    //   // const data = await response.arrayBuffer();
+    //   // const blob = new Blob(data.data);
+    //   // const arrayBuffer = await blob.arrayBuffer();
+    //   const buf = Buffer.from(data.data, "binary");
+    //   // const blob = new Blob([data.data]);
+    //   await fs.writeFileSync(
+    //     `./public/invalidImages/${req.headers.id}.png`,
+    //     buf
+    //   );
+    //   // then set that as the directory for creating image
+    //   req.query.img = `./public/invalidImages/${req.headers.id}.png`;
+    // }
 
     const chartID = Math.random() * 1000000000;
 
@@ -72,21 +72,21 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.end(data);
   } catch (err) {
-    console.log(err);
-    if (/403/.test(err.message)) {
-      const imageId = Math.random() * 1000000;
-      const retryWithSavedImage = await fetch(
-        `${getEnvironmentUrl()}/api/chart?configs=${req.query.configs}${
-          !req.query.img ? "" : `&img=${req.query.img}`
-        }${!req.query.bg ? "" : `&bg=${req.query.bg}`}&size=${
-          req.query.size || `400x400`
-        }`,
-        { headers: { retry: "1", id: String(imageId) } }
-      );
+    // console.log(err);
+    // if (/403/.test(err.message)) {
+    //   const imageId = Math.random() * 1000000;
+    //   const retryWithSavedImage = await fetch(
+    //     `${getEnvironmentUrl()}/api/chart?configs=${req.query.configs}${
+    //       !req.query.img ? "" : `&img=${req.query.img}`
+    //     }${!req.query.bg ? "" : `&bg=${req.query.bg}`}&size=${
+    //       req.query.size || `400x400`
+    //     }`,
+    //     { headers: { retry: "1", id: String(imageId) } }
+    //   );
 
-      const data = await retryWithSavedImage.blob();
-      res.end(data);
-    }
+    //   const data = await retryWithSavedImage.blob();
+    //   res.end(data);
+    // }
 
     res.json({ error: err.message });
   }
