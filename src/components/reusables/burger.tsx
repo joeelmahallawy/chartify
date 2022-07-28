@@ -51,16 +51,16 @@ const Hamburger = () => {
               Pricing
             </ChakraMenuItem> */}
           <ChakraMenuItem
-            onClick={() => router.push("/dashboard")}
+            onClick={() => router.push("/app")}
             _focus={{}}
             _hover={{ background: "gray.200" }}
           >
             Get started
           </ChakraMenuItem>
 
-          <MenuDivider />
+          {/* <MenuDivider /> */}
 
-          <ChakraMenuItem
+          {/* <ChakraMenuItem
             onClick={() => router.push("/login")}
             _focus={{}}
             _hover={{ background: "gray.200" }}
@@ -73,7 +73,7 @@ const Hamburger = () => {
             _hover={{ background: "gray.200" }}
           >
             Sign up
-          </ChakraMenuItem>
+          </ChakraMenuItem> */}
         </MenuList>
       </ChakraMenu>
     </Box>

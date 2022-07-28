@@ -57,7 +57,7 @@ const HomePageHeader = () => {
             display: "flex",
             gap: 3,
           }}
-          href="/dashboard"
+          href="/"
         >
           <Center sx={{ gap: 5 }}>
             <Image src={Logo.src} width={150} height={50} />
