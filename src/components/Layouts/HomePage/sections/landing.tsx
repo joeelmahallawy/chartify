@@ -1,8 +1,10 @@
 import { Heading } from "@chakra-ui/layout";
-import { Center, Title, Image, Box, Code } from "@mantine/core";
+import { Center, Title, Text, Image, Box, Code, Button } from "@mantine/core";
 import { useClipboard } from "@mantine/hooks";
 import { showNotification } from "@mantine/notifications";
-import { isInProduction } from "../../../../helpers";
+import React from "react";
+import { getEnvironmentUrl, isInProduction } from "../../../../helpers";
+import { phoneWidth, tabletWidth } from "../../../../utils";
 import customNotification from "../../../reusables/customNotification";
 
 const Landing = () => {
@@ -43,11 +45,14 @@ const Landing = () => {
       </Heading>
       <Center sx={{ flexDirection: "column" }}>
         {/* <pre style={{ background: "red", margin: "0 auto", width: "50%" }}> */}
+        <Button color="violet" mt="2.5%" radius="xl" size="xl">
+          Get started now
+        </Button>
         <Code
           mt="3%"
           onClick={() => {
             clipboard.copy(
-              `http://localhost:3000/api/chart?configs={"type":"line","data":{"labels":[2018,2019,2020,2021,2022],"datasets":[{"label":"Users","data":[10,30,80,190,350]}]}}`
+              `${getEnvironmentUrl()}/api/chart?configs={"type":"line","data":{"labels":[2018,2019,2020,2021,2022],"datasets":[{"label":"Users","data":[10,30,80,190,350]}]}}`
             );
             return customNotification("Copied to clipboard!", "", "green");
           }}
@@ -55,10 +60,12 @@ const Landing = () => {
           sx={(t) => ({
             textAlign: "left",
             width: "100%",
+            [phoneWidth]: { width: 300 },
+            [tabletWidth]: { width: 300 },
             "&:hover": { cursor: "pointer", background: t.colors.gray[1] },
           })}
         >
-          {`http://localhost:3000/api/chart`}
+          {getEnvironmentUrl()}
 
           <span
             style={{
@@ -77,11 +84,13 @@ const Landing = () => {
         {/* </pre> */}
         <Image
           mt={20}
-          width={350}
-          height={350}
-          src={`${
-            isInProduction() ? "http://localhost:3000" : "http://localhost:3000"
-          }/api/chart?configs={%22type%22:%22line%22,%22data%22:{%22labels%22:[2018,2019,2020,2021,2022],%22datasets%22:[{%22label%22:%22Users%22,%22data%22:[10,30,80,190,350]}]}}`}
+          sx={{
+            width: 350,
+            height: 350,
+            [phoneWidth]: { width: 250, height: 250, marginBottom: 20 },
+            [tabletWidth]: { width: 250, height: 250, marginBottom: 20 },
+          }}
+          src={`${getEnvironmentUrl()}/api/chart?configs={%22type%22:%22line%22,%22data%22:{%22labels%22:[2018,2019,2020,2021,2022],%22datasets%22:[{%22label%22:%22Users%22,%22data%22:[10,30,80,190,350]}]}}`}
         />
       </Center>
     </Center>

@@ -1,6 +1,6 @@
 import { ChartConfiguration } from "chart.js";
 import { ChartJSNodeCanvas } from "chartjs-node-canvas";
-import { loadImage } from "canvas";
+import { loadImage, Image } from "canvas";
 import { NextApiRequest } from "next";
 
 export const isValidChartSize = (size: string): true | never => {
@@ -35,6 +35,9 @@ export const createImage = async (
   const options: ChartConfiguration = {
     ...configs,
     options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      aspectRatio: 0,
       backgroundColor: !configs.options?.backgroundColor
         ? "#40c057"
         : configs.options.backgroundColor,
@@ -71,21 +74,26 @@ export const plugin = async (
 ): Promise<ChartConfiguration["plugins"]> => {
   const image = new Image();
   const loadedImage = await loadImage(imgSrc);
-  loadedImage.width = size.width / 2;
-  loadedImage.height = size.height / 2;
-  console.log(backgroundColor);
+
   return [
     {
       id,
+
       beforeDraw: (chart) => {
+        chart.aspectRatio;
         if (image.complete) {
           const ctx = chart.ctx;
-          // const { top, left, width, height, bottom, right } = chart.chartArea;
+          const { top, left, width, height, bottom, right } = chart.chartArea;
 
-          const x = size.width / 4;
-          const y = size.height / 4;
+          const x = left + width / 2 - height / 2;
+          const y = top + height / 2 - height / 2;
           // @ts-expect-error
-          ctx.drawImage(loadedImage, x, y);
+          ctx.drawImage(loadedImage, x, y, height, height);
+
+          // const x = size.width / 4;
+          // const y = size.height / 4;
+
+          // ctx.drawImage(loadedImage, x, y);
         } else {
           loadedImage.onload = () => chart.draw();
         }
@@ -144,3 +152,21 @@ export const backgroundPlugin = (
   },
 ];
 export const isInProduction = () => process.env.NODE_ENV === "production";
+
+export const getEnvironmentUrl = () =>
+  isInProduction()
+    ? process.env.NEXT_PUBLIC_PRODUCTION_URL
+    : process.env.NEXT_PUBLIC_DEVELOPMENT_URL;
+
+export const parseUrlIntoConfigs = (
+  url: string
+): { configs: string; bg: string; img: string; size: string } => {
+  const passedIn = new URL(url);
+  const params = passedIn.searchParams;
+  return {
+    configs: params.get("configs") ?? "",
+    bg: params.get("bg") ?? "",
+    img: params.get("img") ?? "",
+    size: params.get("size") ?? "",
+  };
+};

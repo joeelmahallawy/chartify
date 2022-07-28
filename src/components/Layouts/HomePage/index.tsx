@@ -3,7 +3,8 @@ import React from "react";
 import { Footer } from "../Footer";
 
 import HomePageHeader from "../Header";
-import TryItSection from "./sections/example";
+import FeatureSection from "./sections/features";
+
 import LandingSection from "./sections/landing";
 import PricingSection from "./sections/pricing";
 
@@ -12,8 +13,8 @@ const HomePage = () => {
     <Box sx={{ background: "white" }}>
       <HomePageHeader />
       <LandingSection />
+      <FeatureSection />
       <PricingSection />
-      {/* <TryItSection /> */}
       <Footer />
     </Box>
   );

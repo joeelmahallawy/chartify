@@ -1,19 +1,15 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import requestIp from "request-ip";
+import axios from "axios";
 import fs from "fs";
-import crypto from "crypto";
-
 import {
   backgroundPlugin,
   createImage,
   getChartDimensions,
+  getEnvironmentUrl,
   isHexCode,
   isValidChartSize,
   plugin,
 } from "../../helpers";
-import prisma from "../../prisma";
-
-// image.src = "https://www.chartjs.org/img/chartjs-logo.svg";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -31,6 +27,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const { height, width } = getChartDimensions(req.query.size as string);
       size = { height, width };
     }
+
+    // NOTE: this is for edge cases when we have a image that can't be supported, we save it in our project then use it by referencing the file directory
+    // if (req.headers.retry == "1") {
+    //   // create image
+    //   const data = await axios.get(req.query.img as string);
+    //   // const data = await response.arrayBuffer();
+    //   fs.writeFileSync(`./savedInvalidImages/${req.headers.id}.png`, data.data);
+    //   // then set that as the directory for creating image
+    //   req.query.img = `./savedInvalidImages/${req.headers.id}.png`;
+    // }
 
     const chartID = Math.random() * 1000000000;
     // create chart
@@ -56,7 +62,22 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.end(data);
   } catch (err) {
-    res.send({ error: err.message });
+    // if (/403/.test(err.message)) {
+    //   const imageId = Math.random() * 1000000;
+    //   const retryWithSavedImage = await fetch(
+    //     `${getEnvironmentUrl()}/api/chart?configs=${req.query.configs}${
+    //       !req.query.img ? "" : `&img=${req.query.img}`
+    //     }${!req.query.bg ? "" : `&bg=${req.query.bg}`}&size=${
+    //       req.query.size || `400x400`
+    //     }`,
+    //     { headers: { retry: "1", id: String(imageId) } }
+    //   );
+
+    //   const data = await retryWithSavedImage.blob();
+    //   res.end(data);
+    // }
+
+    res.json({ error: err.message });
   }
 };
 export default handler;

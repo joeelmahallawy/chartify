@@ -1,48 +1,89 @@
-import { Box, Center, List, Text, Title } from "@mantine/core";
+import {
+  Box,
+  ThemeIcon,
+  Button,
+  Center,
+  List,
+  Text,
+  Title,
+} from "@mantine/core";
 import React from "react";
+import { ArrowNarrowRight, Check } from "tabler-icons-react";
+import { laptopWidth, phoneWidth, tabletWidth } from "../../../../utils";
 
 const PricingSection = () => {
   return (
-    <Center sx={{ width: "90%", margin: "0 auto" }}>
-      <Box sx={{ width: "50%" }}>
-        <Title>Simple pricing</Title>
-        <Text>
+    <Center
+      sx={{
+        width: "70%",
+        margin: "5% auto",
+        gap: "10%",
+        [phoneWidth]: { flexDirection: "column" },
+        [tabletWidth]: { flexDirection: "column" },
+      }}
+    >
+      <Box
+        sx={{
+          width: "60%",
+          [phoneWidth]: { width: "100%" },
+          [tabletWidth]: { width: "100%" },
+        }}
+      >
+        <Title sx={{ fontWeight: 800 }}>Simple Pricing</Title>
+        <Text mt={10} color="dimmed">
           Try a free trial and decide if Chartify is best for your business.
           With Chartify, you can easily integrate charts into your apps and
           pitchdecks!
         </Text>
+        <Button mt={20} color="pink" radius="xl" size="lg">
+          Open an account{" "}
+          <ArrowNarrowRight size={30} strokeWidth={1.5} color={"white"} />
+        </Button>
       </Box>
-      <Box sx={{ width: "50%" }}>
-        <Center
+      <Center sx={{ width: "40%", flexDirection: "column" }}>
+        <Box
+          // ml="auto"
           sx={{
             justifyContent: "flex-start",
             flexDirection: "column",
             boxShadow: "0px 0px 10px 1px #E1E1E1",
             borderRadius: 10,
-            padding: "3%",
+            padding: "5%",
             width: 400,
-            height: 500,
+            height: 450,
+            [phoneWidth]: { marginTop: "20%", width: 350, height: 400 },
+            [tabletWidth]: { marginTop: "20%", width: 350, height: 400 },
           }}
         >
-          <Text mr="auto" size="xl" color="#6968F7">
+          <Text
+            mr="auto"
+            size="xl"
+            sx={{ fontSize: "25px" }}
+            weight={300}
+            color="#6968F7"
+          >
             Starter bundle
           </Text>
-          <Text mr="auto" size="lg" mt={10}>
-            $6.99 /mo
+          <Text mr="auto" size="lg" mt={30}>
+            <span style={{ fontSize: "25px" }}>$6.99</span>
+            <span style={{ color: "gray" }}> /month</span>
           </Text>
-          <List mt={20}>
-            <List.Item>Clone or download repository from GitHub</List.Item>
-            <List.Item>Install dependencies with yarn</List.Item>
-            <List.Item>
-              To start development server run npm start command
-            </List.Item>
-            <List.Item>
-              Run tests to make sure your changes do not break the build
-            </List.Item>
-            <List.Item>Submit a pull request once you are done</List.Item>
+
+          <List
+            spacing="md"
+            size="lg"
+            center
+            icon={<Check size={26} strokeWidth={2} color={"#40bf44"} />}
+            mt={30}
+          >
+            <List.Item>Unlimited charts</List.Item>
+            <List.Item>Custom background images</List.Item>
+            <List.Item>Custom plugins</List.Item>
+            <List.Item>URL shorteners</List.Item>
+            <List.Item>No watermarks</List.Item>
           </List>
-        </Center>
-      </Box>
+        </Box>
+      </Center>
     </Center>
   );
 };

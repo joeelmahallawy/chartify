@@ -122,18 +122,18 @@ const HomePageHeader = () => {
           display={["none", "none", "flex", "flex", "flex", "flex"]}
           style={{ gap: 20 }}
         >
-          <Anchor
+          {/* <Anchor
             sx={{
               "&:hover": { textDecoration: "none" },
               color: "white",
             }}
-            href="/login"
+            href="/api/auth/login"
             size="lg"
           >
             <Text color="black" fontWeight={500} fontSize="lg">
               Login
             </Text>
-          </Anchor>
+          </Anchor> */}
 
           <Anchor href="/login">
             <Button color="pink" radius="xl" size="md">
