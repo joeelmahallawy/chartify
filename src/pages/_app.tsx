@@ -7,9 +7,11 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { sizes } from "../utils";
 import { NotificationsProvider } from "@mantine/notifications";
 import icon from "../../assets/chartify.png";
+import { GoogleAnalytics, usePageViews } from "nextjs-google-analytics";
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
+  usePageViews();
 
   return (
     <>
@@ -32,6 +34,7 @@ export default function App(props: AppProps) {
           },
         }}
       >
+        <GoogleAnalytics gaMeasurementId="G-50M1PPDEQK" />
         <NotificationsProvider position="bottom-center" zIndex={99999999}>
           <ChakraProvider>
             <Component {...pageProps} />
