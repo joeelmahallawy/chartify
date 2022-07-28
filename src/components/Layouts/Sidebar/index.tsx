@@ -65,7 +65,7 @@ function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
 const mockdata = [
   { icon: IconHome2, label: "Home" },
   // { icon: IconBook, label: "Docs" },
-  { icon: IconChartAreaLine, label: "Charts" },
+  { icon: IconChartAreaLine, label: "Saved charts" },
 ];
 
 export default function Page({ children, setPage }) {
@@ -82,7 +82,7 @@ export default function Page({ children, setPage }) {
           home: false,
           docs: false,
           charts: false,
-          [link.label.toLowerCase()]: true,
+          [link.label.replaceAll(" ", "").toLowerCase()]: true,
         });
       }}
     />

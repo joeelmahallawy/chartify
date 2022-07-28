@@ -56,7 +56,7 @@ const ChartCreator = () => {
   });
 
   const [image, setImage] = useState(
-    `${getEnvironmentUrl()}/api/chart?configs={"type": "line","data": {"labels": [2018,2019,2020],"datasets": [{"label": "Users","data": [10,30,80]}]}}`
+    `${getEnvironmentUrl()}/api/chart?configs={"type": "line","data": {"labels": [2018,2019,2020],"datasets": [{"label": "Users","data": [10,30,80]}]}}&size=400x400`
   );
 
   return (

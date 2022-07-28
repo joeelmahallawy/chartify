@@ -12,13 +12,13 @@ const AppPage = () => {
   const [pages, setPages] = useState({
     home: true,
     docs: false,
-    charts: false,
+    savedcharts: false,
   });
   return (
     <Page setPage={setPages}>
       {pages.home && <ChartCreator />}
       {/* {pages.docs && <Docs />} */}
-      {pages.charts && <MyCharts />}
+      {pages.savedcharts && <MyCharts />}
     </Page>
   );
 };

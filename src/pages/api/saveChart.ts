@@ -66,6 +66,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     await client.connect();
     const { imageUrl: value } = JSON.parse(req.body);
     const key = randomHash();
+
+    console.log("THE VAL", value);
     await client.set(
       key,
       value

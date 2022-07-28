@@ -53,10 +53,10 @@ export function Footer() {
       link: "mailto:youssef.elmahallawy01@gmail.com",
       label: "Contact",
     },
-    {
-      link: "/pricing",
-      label: "Pricing",
-    },
+    // {
+    //   link: "/pricing",
+    //   label: "Pricing",
+    // },
   ].map((link) => (
     <Anchor<"a">
       color="dimmed"

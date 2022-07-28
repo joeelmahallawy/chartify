@@ -6,6 +6,7 @@ import React from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import { sizes } from "../utils";
 import { NotificationsProvider } from "@mantine/notifications";
+import icon from "../../assets/chartify.png";
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
@@ -13,11 +14,12 @@ export default function App(props: AppProps) {
   return (
     <>
       <Head>
-        <title>Page title</title>
+        <title>Chartify</title>
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
+        <link rel="shortcut icon" href={icon.src} sizes="16x16"></link>
       </Head>
 
       <MantineProvider
