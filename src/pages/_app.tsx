@@ -30,7 +30,7 @@ export default function App(props: AppProps) {
           },
         }}
       >
-        <NotificationsProvider position="bottom-center">
+        <NotificationsProvider position="bottom-center" zIndex={99999999}>
           <ChakraProvider>
             <Component {...pageProps} />
           </ChakraProvider>

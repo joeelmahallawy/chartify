@@ -15,7 +15,7 @@ import {
 } from "@mantine/core";
 import React from "react";
 import { getEnvironmentUrl, isInProduction } from "../../../../helpers";
-import codeSnippet from "../../../../../public/code-snippet.png";
+
 import { Plus } from "tabler-icons-react";
 import { phoneWidth, tabletWidth } from "../../../../utils";
 

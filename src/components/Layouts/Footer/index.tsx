@@ -13,7 +13,7 @@ import {
 } from "@tabler/icons";
 import { useRouter } from "next/router";
 import React from "react";
-import Logo from "../../../../public/chartify-logo-trans.png";
+import Logo from "../../../../assets/chartify-logo-trans.png";
 const useStyles = createStyles((theme) => ({
   footer: {
     marginTop: 120,

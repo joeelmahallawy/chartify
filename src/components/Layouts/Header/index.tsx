@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { Anchor, Button, Center, Code, createStyles } from "@mantine/core";
-import Logo from "../../../../public/chartify-logo-trans.png";
+import Logo from "../../../../assets/chartify-logo-trans.png";
 import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Hamburger from "../../reusables/burger";

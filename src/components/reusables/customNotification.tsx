@@ -7,6 +7,7 @@ const customNotification = (
   color: DefaultMantineColor
 ) =>
   showNotification({
+    styles: (theme) => ({ root: { zIndex: 999999999 } }),
     disallowClose: true,
     title,
     message,

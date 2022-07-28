@@ -86,7 +86,7 @@ const ChartCreator = () => {
             const url = URL.createObjectURL(chartBlob);
 
             setImage(
-              `/api/chart?configs=${values.configs}${
+              `${getEnvironmentUrl()}/api/chart?configs=${values.configs}${
                 // add background image of chart
                 isEmpty(values.backgroundImage)
                   ? ""

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Navbar,
-  Center,
   Image,
   Tooltip,
   UnstyledButton,
@@ -13,25 +12,10 @@ import {
 import {
   TablerIcon,
   IconHome2,
-  IconGauge,
-  IconDeviceDesktopAnalytics,
-  IconFingerprint,
-  IconCalendarStats,
-  IconUser,
-  IconSettings,
-  IconLogout,
   IconSwitchHorizontal,
-  IconBook,
-  IconDoorExit,
-  IconChartArea,
-  IconChartArcs,
   IconChartAreaLine,
 } from "@tabler/icons";
-import Logo from "../../../../public/chartify.png";
-import { Book } from "tabler-icons-react";
-import ChartCreator from "../ChartCreator";
-
-// import Logo from "../../../../public/chartify-logo-trans.png";
+import Logo from "../../../../assets/chartify.png";
 
 const useStyles = createStyles((theme) => ({
   link: {

@@ -8,6 +8,7 @@ import {
   Button,
   TextInput,
   JsonInput,
+  Code,
 } from "@mantine/core";
 import { useForm } from "@mantine/hooks";
 import { Link } from "@chakra-ui/layout";
@@ -20,14 +21,22 @@ import {
 } from "../../../helpers";
 import { isEmpty } from "../ChartCreator";
 import customNotification from "../../reusables/customNotification";
+import { useClipboard } from "@mantine/hooks";
 
 const MyCharts = () => {
+  const clipboard = useClipboard();
+
   const [deleteModalOpened, setDeleteModalOpened] = useState(false);
   const [state, doFetch] = useAsyncFn(async () => {
-    localStorage.removeItem("chakra-ui-color-mode");
     const response = await fetch(`/api/getCharts`, {
       method: "POST",
-      body: JSON.stringify({ keys: Object.keys(localStorage) }),
+      body: JSON.stringify({
+        keys: Object.keys(localStorage).filter((val) =>
+          /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
+            val
+          )
+        ),
+      }),
     });
     const result = await response.json();
     return result;
@@ -39,7 +48,7 @@ const MyCharts = () => {
   const [currentChartOpen, setCurrentChartOpen] = useState(undefined);
 
   const [opened, setOpened] = useState(false);
-
+  const [nameOfChart, setNameOfChart] = useState("");
   const form = useForm({
     initialValues: {
       configs: "",
@@ -137,6 +146,7 @@ const MyCharts = () => {
         }
       >
         {/* {state?.value?.data[currentChartOpen]?.value} */}
+        {console.log(nameOfChart)}
         <form
           style={{ marginTop: "1%" }}
           onSubmit={form.onSubmit(async (values) => {
@@ -161,6 +171,12 @@ const MyCharts = () => {
 
               const data = await response.json();
               if (data.success) {
+                typeof window !== "undefined" &&
+                  // nameOfChart &&
+                  localStorage.setItem(
+                    state?.value?.data[currentChartOpen]?.key,
+                    nameOfChart
+                  );
                 setOpened(false);
                 doFetch();
                 return customNotification("Successfully saved!", "", "green");
@@ -170,10 +186,45 @@ const MyCharts = () => {
             }
           })}
         >
-          <Center sx={{ justifyContent: "flex-start", gap: 5 }}>
+          <Text mb={5}>Grab your chart from this url:</Text>
+          <Code
+            p={7}
+            onClick={() => {
+              clipboard.copy(
+                `${getEnvironmentUrl()}/charts/${
+                  state?.value?.data[currentChartOpen]?.key
+                }.png`
+              );
+              return customNotification("Copied to clipboard", "", "green");
+            }}
+            sx={(theme) => ({
+              "&:hover": {
+                background: theme.colors.gray[2],
+                cursor: "pointer",
+              },
+            })}
+          >
+            {`${getEnvironmentUrl()}/charts/${
+              state?.value?.data[currentChartOpen]?.key
+            }.png`}
+          </Code>
+          <TextInput
+            mt={10}
+            label="Chart name"
+            placeholder="Name of your chart"
+            defaultValue={
+              typeof window !== "undefined" &&
+              localStorage.getItem(state?.value?.data[currentChartOpen]?.key)
+            }
+            onChange={(e) => {
+              setNameOfChart(e.target.value);
+            }}
+          />
+          <Center mt={10} sx={{ justifyContent: "flex-start", gap: 5 }}>
             <label htmlFor="configs">Chart.js configurations</label>
           </Center>
           <JsonInput
+            mt={3}
             {...form.getInputProps("configs")}
             description={
               <Text size="sm">
@@ -231,7 +282,7 @@ const MyCharts = () => {
             />
           </Center>
           <Center mt={10} sx={{ flexDirection: "column" }}>
-            <Title>Current chart</Title>
+            <Title>{nameOfChart}</Title>
             <img
               style={{ marginTop: 10 }}
               src={`/api/chart?configs=${form.values.configs}${
@@ -268,11 +319,17 @@ const MyCharts = () => {
         (value, i) =>
           value && (
             <Center
+              key={i}
               onClick={() => {
                 setOpened(true);
+                setNameOfChart(
+                  typeof window !== "undefined" &&
+                    localStorage.getItem(state?.value?.data[i]?.key)
+                );
                 setCurrentChartOpen(i);
+
                 const data = parseUrlIntoConfigs(
-                  `${getEnvironmentUrl()}${state?.value?.data[i].value}`
+                  `${state?.value?.data[i].value}`
                 );
 
                 const { height, width } = getChartDimensions(data.size);
@@ -294,7 +351,7 @@ const MyCharts = () => {
                 // );
               }}
               m={10}
-              p={20}
+              p={15}
               sx={(theme) => ({
                 justifyContent: "space-around",
                 display: "inline-block",
@@ -314,7 +371,13 @@ const MyCharts = () => {
                 {typeof window !== "undefined" &&
                   localStorage.getItem(value.key)}
               </Title>
-              <img width={300} height={300} key={i} src={value.value} />
+              <img
+                width={300}
+                height={300}
+                style={{ marginTop: 10 }}
+                key={i}
+                src={value.value}
+              />
             </Center>
           )
       )}
