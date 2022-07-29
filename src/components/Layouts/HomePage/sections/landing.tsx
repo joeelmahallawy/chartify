@@ -1,4 +1,4 @@
-import { Heading } from "@chakra-ui/layout";
+import { Heading, Link } from "@chakra-ui/layout";
 import {
   Center,
   Title,
@@ -39,7 +39,7 @@ const Landing = () => {
         // bg="red"
         fontSize={["4xl", "4xl", "5xl", "5xl", "6xl", "6xl"]}
       >
-        Create visuals with your company's data{" "}
+        Create chart images through a single configurable
         <span
           style={{
             color: "linear-gradient(to right, #30CFD0 0%, #330867 100%)",
@@ -50,49 +50,59 @@ const Landing = () => {
           }}
         >
           {" "}
-          quickly
+          API
         </span>
       </Heading>
+      <Text size="xl" color="dimmed">
+        Embed charts in your emails, websites and pitchdecks quickly by passing
+        in some data
+      </Text>
       <Center sx={{ flexDirection: "column" }}>
         {/* <pre style={{ background: "red", margin: "0 auto", width: "50%" }}> */}
-        <Anchor mt={10} href="/app">
+        <Anchor mt={10} href="/editor">
           <Button color="violet" mt="2.5%" radius="xl" size="xl">
             Start making charts
           </Button>
         </Anchor>
-        <Code
-          mt="3%"
-          onClick={() => {
-            clipboard.copy(
-              `${getEnvironmentUrl()}/api/chart?configs={"type":"line","data":{"labels":[2018,2019,2020,2021,2022],"datasets":[{"label":"Users","data":[10,30,80,190,350]}]}}`
-            );
-            return customNotification("Copied to clipboard!", "", "green");
-          }}
-          block
-          sx={(t) => ({
-            textAlign: "left",
-            width: "100%",
-            [phoneWidth]: { width: 300 },
-            [tabletWidth]: { width: 300 },
-            "&:hover": { cursor: "pointer", background: t.colors.gray[1] },
-          })}
+        <Link
+          isExternal
+          href={`${getEnvironmentUrl()}/api/chart?configs={"type":"line","data":{"labels":[2018,2019,2020,2021,2022],"datasets":[{"label":"Users","data":[10,30,80,190,350]}]}}`}
+          _hover={{}}
         >
-          {getEnvironmentUrl()}
-
-          <span
-            style={{
-              background: "pink",
-              paddingTop: "0.5%",
-              paddingBottom: "0.5%",
+          <Code
+            mt="3%"
+            onClick={() => {
+              clipboard.copy(
+                `${getEnvironmentUrl()}/api/chart?configs={"type":"line","data":{"labels":[2018,2019,2020,2021,2022],"datasets":[{"label":"Users","data":[10,30,80,190,350]}]}}`
+              );
+              // return customNotification("Copied to clipboard!", "", "green");
             }}
+            block
+            sx={(t) => ({
+              textAlign: "left",
+              width: "100%",
+              [phoneWidth]: { width: 300 },
+              [tabletWidth]: { width: 300 },
+              "&:hover": { cursor: "pointer", background: t.colors.gray[1] },
+            })}
           >
-            {`?configs={"type":"line",`}
+            {getEnvironmentUrl()}
 
-            {`"data":{"labels":[2018,2019,2020,2021,2022],`}
-            <br />
-            {`"datasets":[{"label":"Users","data":[10,30,80,190,350]}]}`}
-          </span>
-        </Code>
+            <span
+              style={{
+                background: "pink",
+                paddingTop: "0.5%",
+                paddingBottom: "0.5%",
+              }}
+            >
+              {`?configs={"type":"line",`}
+
+              {`"data":{"labels":[2018,2019,2020,2021,2022],`}
+              <br />
+              {`"datasets":[{"label":"Users","data":[10,30,80,190,350]}]}`}
+            </span>
+          </Code>
+        </Link>
         {/* </pre> */}
         <Image
           mt={20}

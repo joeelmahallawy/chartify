@@ -63,10 +63,10 @@ const FeatureSection = () => {
                 [phoneWidth]: { width: 300, height: 300 },
                 [tabletWidth]: { width: 300, height: 300 },
               }}
-              src={`${getEnvironmentUrl()}/api/chart?configs={%22type%22:%22bar%22,%22data%22:{%22labels%22:[%22April%22,%22May%22,%22June%22,%22July%22],%22datasets%22:[{%22label%22:%22Premium written (million)%22,%22data%22:[0.2,0.3,0.6,1.8],%22backgroundColor%22:[%22black%22,%22orange%22]}]}}&img=https://withshepherd.com/images/logo-symbol.jpg`}
+              src={`${getEnvironmentUrl()}/api/chart?configs={%22type%22:%22bar%22,%22data%22:{%22labels%22:[%22April%22,%22May%22,%22June%22,%22July%22],%22datasets%22:[{%22label%22:%22Premium written (million)%22,%22data%22:[0.2,0.3,0.6,1.8],%22backgroundColor%22:[%22black%22,%22orange%22]}]}}`}
             />
             <Heading
-              mt="2.5%"
+              mt="5%"
               color="white"
               fontWeight="extrabold"
               textAlign="center"
@@ -82,10 +82,10 @@ const FeatureSection = () => {
           <Plus size={100} strokeWidth={2} color={"white"} />
           <Center sx={{ flexDirection: "column", marginTop: 30 }}>
             <Code sx={{ margin: "0 auto", width: "60%" }} lang="javascript">
-              {`<img src='${getEnvironmentUrl()}/api/chart?configs={"type":"bar","data":{"labels":["April","May","June","July"],"datasets":[{"label":"Premium written (million)","data":[0.2,0.3,0.6,1.8],"backgroundColor":["black","orange%22]}]}}&img=https://withshepherd.com/images/logo-symbol.jpg' />`}
+              {`<img src='${getEnvironmentUrl()}/api/chart?configs={"type":"bar","data":{"labels":["April","May","June","July"],"datasets":[{"label":"Premium written (million)","data":[0.2,0.3,0.6,1.8],"backgroundColor":["black","orange%22]}]}}' />`}
             </Code>
             <Heading
-              mt="1%"
+              mt="2%"
               color="white"
               fontWeight="extrabold"
               textAlign="center"

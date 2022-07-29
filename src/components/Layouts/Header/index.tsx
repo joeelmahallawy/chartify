@@ -99,7 +99,7 @@ const HomePageHeader = () => {
             fontSize="lg"
             _hover={{ cursor: "pointer" }}
           >
-            <Anchor href="/app">Get started</Anchor>
+            <Anchor href="/editor">Get started</Anchor>
           </Text> */}
 
           <Text
@@ -119,8 +119,16 @@ const HomePageHeader = () => {
             fontSize="lg"
             _hover={{ cursor: "pointer" }}
           >
-            <a href="/app">Get started</a>
+            <a href="/editor">Live editor</a>
           </Text>
+          {/* <Text
+            color="black"
+            fontWeight={500}
+            fontSize="lg"
+            _hover={{ cursor: "pointer" }}
+          >
+            <a href="/editor">Get started</a>
+          </Text> */}
           <Text
             color="black"
             fontWeight={500}
@@ -131,25 +139,12 @@ const HomePageHeader = () => {
           </Text>
         </ChakraCenter>
         <ChakraCenter
-          display={["none", "none", "flex", "flex", "flex", "flex"]}
+          // display={["none", "none", "flex", "flex", "flex", "flex"]}
           style={{ gap: 20 }}
         >
-          {/* <Anchor
-            sx={{
-              "&:hover": { textDecoration: "none" },
-              color: "white",
-            }}
-            href="/api/auth/login"
-            size="lg"
-          >
-            <Text color="black" fontWeight={500} fontSize="lg">
-              Login
-            </Text>
-          </Anchor> */}
-
-          <Anchor href="/app">
+          <Anchor href="/editor">
             <Button color="pink" radius="xl" size="md">
-              <Text fontSize="lg">Join now</Text>
+              <Text fontSize="lg">Enter </Text>
             </Button>
           </Anchor>
         </ChakraCenter>

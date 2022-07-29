@@ -5,21 +5,22 @@ import MyCharts from "../components/Layouts/SavedCharts";
 import Page from "../components/Layouts/Sidebar";
 
 const AppPage = () => {
-  useEffect(() => {
-    localStorage.removeItem("chakra-ui-color-mode");
-  }, []);
+  return null;
+  // useEffect(() => {
+  //   localStorage.removeItem("chakra-ui-color-mode");
+  // }, []);
 
-  const [pages, setPages] = useState({
-    home: true,
-    docs: false,
-    savedcharts: false,
-  });
-  return (
-    <Page setPage={setPages}>
-      {pages.home && <ChartCreator />}
-      {/* {pages.docs && <Docs />} */}
-      {pages.savedcharts && <MyCharts />}
-    </Page>
-  );
+  // const [pages, setPages] = useState({
+  //   home: true,
+  //   docs: false,
+  //   savedcharts: false,
+  // });
+  // return (
+  //   <Page setPage={setPages}>
+  //     {pages.home && <ChartCreator />}
+  //     {/* {pages.docs && <Docs />} */}
+  //     {pages.savedcharts && <MyCharts />}
+  //   </Page>
+  // );
 };
 export default AppPage;
