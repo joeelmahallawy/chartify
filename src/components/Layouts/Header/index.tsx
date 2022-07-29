@@ -72,11 +72,7 @@ const HomePageHeader = () => {
       </Center>
 
       <>
-        <ChakraCenter
-          gap={10}
-          display={["none", "none", "flex", "flex", "flex", "flex"]}
-        >
-          {/* <Text
+        {/* <Text
             color="black"
             fontWeight={500}
             onClick={() => {
@@ -91,7 +87,7 @@ const HomePageHeader = () => {
           > 
             Docs
           </Text> */}
-          {/* <Text
+        {/* <Text
             color="black"
             fontWeight={500}
             // onClick={() => router.push("/dashboard")}
@@ -102,7 +98,7 @@ const HomePageHeader = () => {
             <Anchor href="/editor">Get started</Anchor>
           </Text> */}
 
-          <Text
+        {/* <Text
             color="black"
             fontWeight={500}
             fontSize="lg"
@@ -112,16 +108,16 @@ const HomePageHeader = () => {
             }
           >
             Home
-          </Text>
-          <Text
+          </Text> */}
+        {/* <Text
             color="black"
             fontWeight={500}
             fontSize="lg"
             _hover={{ cursor: "pointer" }}
           >
             <a href="/editor">Live editor</a>
-          </Text>
-          {/* <Text
+          </Text> */}
+        {/* <Text
             color="black"
             fontWeight={500}
             fontSize="lg"
@@ -129,6 +125,10 @@ const HomePageHeader = () => {
           >
             <a href="/editor">Get started</a>
           </Text> */}
+        <ChakraCenter
+          // {/* // display={["none", "none", "flex", "flex", "flex", "flex"]} */}
+          style={{ gap: 20 }}
+        >
           <Text
             color="black"
             fontWeight={500}
@@ -137,14 +137,10 @@ const HomePageHeader = () => {
           >
             <a href="mailto:youssef.elmahallawy01@gmail.com">Contact us</a>
           </Text>
-        </ChakraCenter>
-        <ChakraCenter
-          // display={["none", "none", "flex", "flex", "flex", "flex"]}
-          style={{ gap: 20 }}
-        >
+
           <Anchor href="/editor">
             <Button color="pink" radius="xl" size="md">
-              <Text fontSize="lg">Enter </Text>
+              Live editor
             </Button>
           </Anchor>
         </ChakraCenter>

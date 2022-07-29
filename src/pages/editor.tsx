@@ -13,6 +13,7 @@ import React, { useState } from "react";
 import HomePageHeader from "../components/Layouts/Header";
 import { getEnvironmentUrl } from "../helpers";
 import { phoneWidth, tabletWidth } from "../utils";
+import { Footer } from "../components/Layouts/Footer";
 
 const LiveEditor = () => {
   const [backgroundColor, setBackgroundColor] = useState("");
@@ -154,6 +155,7 @@ const LiveEditor = () => {
         width={400}
         height={400}
       />
+      {/* <Footer /> */}
     </Center>
   );
 };

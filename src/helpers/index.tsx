@@ -33,7 +33,6 @@ export const createImage = async (
   };
 
   const options: ChartConfiguration = {
-    ...configs,
     options: {
       responsive: true,
       maintainAspectRatio: true,
@@ -54,6 +53,7 @@ export const createImage = async (
       },
     },
     plugins,
+    ...configs,
   };
 
   const canvasRenderService = new ChartJSNodeCanvas({
@@ -78,7 +78,6 @@ export const plugin = async (
   return [
     {
       id,
-
       beforeDraw: (chart) => {
         chart.aspectRatio;
         if (image.complete) {
