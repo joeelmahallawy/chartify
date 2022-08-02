@@ -11,7 +11,7 @@ import {
 } from "@mantine/core";
 import React, { useState } from "react";
 import HomePageHeader from "../components/Layouts/Header";
-import { getEnvironmentUrl } from "../helpers";
+import { getEnvironmentUrl, parseUrlIntoConfigs } from "../helpers";
 import { phoneWidth, tabletWidth } from "../utils";
 import { Footer } from "../components/Layouts/Footer";
 
@@ -148,7 +148,7 @@ const LiveEditor = () => {
         </Code>
       </Link>
       <img
-        style={{ marginTop: 20 }}
+        style={{ marginTop: 20, paddingBottom: 50 }}
         src={`${getEnvironmentUrl()}/api/chart?configs=${configs}${
           backgroundImage && `&img=${backgroundImage}`
         }${backgroundColor && `&bg=${backgroundColor}`}`}

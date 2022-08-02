@@ -1,4 +1,4 @@
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Heading, Link } from "@chakra-ui/react";
 import styled from "styled-components";
 
 import Highlight, { defaultProps } from "prism-react-renderer";
@@ -6,18 +6,26 @@ import { Prism } from "@mantine/prism";
 
 import {
   Button,
+  Text,
   Center,
   Code,
   Divider,
   Image,
   Space,
   Title,
+  Anchor,
+  JsonInput,
 } from "@mantine/core";
-import React from "react";
+import React, { useState } from "react";
 import { getEnvironmentUrl, isInProduction } from "../../../../helpers";
 
-import { Plus } from "tabler-icons-react";
-import { phoneWidth, tabletWidth } from "../../../../utils";
+import { ArrowNarrowRight, ArrowRight, Plus } from "tabler-icons-react";
+import {
+  laptopWidth,
+  monitorWidth,
+  phoneWidth,
+  tabletWidth,
+} from "../../../../utils";
 
 const Pre = styled.pre`
   text-align: left;
@@ -27,6 +35,115 @@ const Pre = styled.pre`
 `;
 
 const FeatureSection = () => {
+  const [pieChartConfig, setPieChartConfig] = useState(`{
+    "type": "pie",
+    "options": {
+      "plugins": {
+        "title": {
+          "display": true,
+          "text": "A  developer's allocation of time"
+        }
+      }
+    },
+    "data": {
+      "labels": [
+        "Googling  errors",
+        "Learning tools they will never use",
+        "Stackoverflow",
+        "Retrying failed builds",
+        "Writing code"
+      ],
+      "datasets": [
+        {
+          "backgroundColor": [
+            "rgb(255,99,132)",
+            "rgb(54,162,235)",
+            "rgb(255,205,86)",
+            "rgb(0,125,82)",
+            "purple"
+          ],
+          "data": [
+            100,
+            50,
+            250,
+            75,
+            5
+          ]
+        }
+      ]
+    }
+  }`);
+
+  const [exampleChartConfigs, setExampleChartConfigs] = useState(`{
+    "type": "line",
+    "data": {
+      "labels": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "datasets": [
+        {
+          "label": "Users",
+          "data": [
+            10,
+            30,
+            80,
+            190,
+            350
+          ]
+        }
+      ]
+    }
+  }`);
+  const [barGraphConfigs, setBarGraphConfigs] = useState(`{
+    "type": "bar",
+    "data": {
+      "labels": [
+        2012,
+        2013,
+        2014,
+        2015,
+        2016
+      ],
+      "datasets": [
+        {
+          "label": "User Growth",
+          "data": [
+            65,
+            59,
+            80,
+            81,
+            56,
+            55,
+            40
+          ],
+          "backgroundColor": [
+            "rgba(255, 99, 132, 0.2)",
+            "rgba(255, 159, 64, 0.2)",
+            "rgba(255, 205, 86, 0.2)",
+            "rgba(75, 192, 192, 0.2)",
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(153, 102, 255, 0.2)",
+            "rgba(201, 203, 207, 0.2)"
+          ],
+          "borderColor": [
+            "rgb(255, 99, 132)",
+            "rgb(255, 159, 64)",
+            "rgb(255, 205, 86)",
+            "rgb(75, 192, 192)",
+            "rgb(54, 162, 235)",
+            "rgb(153, 102, 255)",
+            "rgb(201, 203, 207)"
+          ],
+          "borderWidth": 1
+        }
+      ]
+    }
+  }`);
+
   return (
     <Box sx={{ background: "#121314" }}>
       <Center sx={{ flexDirection: "column" }} mt="2.5%" pt="5%" pb="5%">
@@ -52,73 +169,89 @@ const FeatureSection = () => {
             need
           </span>
         </Heading>
-        <Center sx={{ gap: 30, flexDirection: "row" }}>
-          <Center sx={{ flexDirection: "column" }}>
+        {/* <Center sx={{ gap: 30, flexDirection: "column" }}>
+          <Center sx={{ flexDirection: "row", gap: 20 }} mt={40}>
             <Image
               style={{ borderRadius: 40 }}
-              mt={40}
               sx={{
-                width: 400,
-                height: 400,
+                width: 500,
+                height: 500,
                 [phoneWidth]: { width: 300, height: 300 },
                 [tabletWidth]: { width: 300, height: 300 },
               }}
               src={`${getEnvironmentUrl()}/api/chart?configs={%22type%22:%22line%22,%22data%22:{%22labels%22:[%222001%22,%222002%22,%222003%22,%222004%22,%222005%22,%222006%22,%222007%22,%222008%22],%22datasets%22:[{%22label%22:%22Searches%20Made%20(billion)%22,%22data%22:[27.4,41,61.3,86.1,141,230.9,372,584.47],%22backgroundColor%22:[%22green%22,%22blue%22,%22red%22,%22yellow%22]}]}}&img=https://api.time.com/wp-content/uploads/2015/09/2003.jpg`}
             />
-            <Heading
-              mt="5%"
-              color="white"
-              fontWeight="extrabold"
-              textAlign="center"
-              letterSpacing="tight"
-              width={["90%", "85%", "80%", "75%", "75%", "75%"]}
-              // bg="red"
-              size="lg"
-              // fontSize={["3xl", "3xl", "4xl", "4xl", "4xl", "4xl"]}
-            >
-              Personalization
-            </Heading>
           </Center>
-          <Center sx={{ flexDirection: "column" }}>
-            <Image
-              style={{ borderRadius: 40 }}
-              mt={40}
+
+          <Center sx={{ flexDirection: "column" }} mt={40}>
+            <Center
               sx={{
-                width: 400,
-                height: 400,
-                [phoneWidth]: { width: 300, height: 300 },
-                [tabletWidth]: { width: 300, height: 300 },
+                flexDirection: "row",
+                [tabletWidth]: { flexDirection: "column" },
+                [phoneWidth]: { flexDirection: "column" },
+                gap: 10,
               }}
-              src={`${getEnvironmentUrl()}/api/chart?configs={%22type%22:%22bar%22,%22data%22:{%22labels%22:[2012,2013,2014,2015,2016],%22datasets%22:[{%20%22label%22:%20%22User Growth%22,%20%22data%22:%20[65,%2059,%2080,%2081,%2056,%2055,%2040],%20%22backgroundColor%22:%20[%20%22rgba(255,%2099,%20132,%200.2)%22,%20%22rgba(255,%20159,%2064,%200.2)%22,%20%22rgba(255,%20205,%2086,%200.2)%22,%20%22rgba(75,%20192,%20192,%200.2)%22,%20%22rgba(54,%20162,%20235,%200.2)%22,%20%22rgba(153,%20102,%20255,%200.2)%22,%20%22rgba(201,%20203,%20207,%200.2)%22%20],%20%22borderColor%22:%20[%20%22rgb(255,%2099,%20132)%22,%20%22rgb(255,%20159,%2064)%22,%20%22rgb(255,%20205,%2086)%22,%20%22rgb(75,%20192,%20192)%22,%20%22rgb(54,%20162,%20235)%22,%20%22rgb(153,%20102,%20255)%22,%20%22rgb(201,%20203,%20207)%22%20],%20%22borderWidth%22:%201%20}]}}`}
-            />
-            <Heading
-              mt="5%"
-              color="white"
-              fontWeight="extrabold"
-              textAlign="center"
-              letterSpacing="tight"
-              width={["90%", "85%", "80%", "75%", "75%", "75%"]}
-              // bg="red"
-              size="lg"
-              // fontSize={["3xl", "3xl", "4xl", "4xl", "4xl", "4xl"]}
             >
-              Hundreds of themes
-            </Heading>
-          </Center>
-          <Center sx={{ flexDirection: "column" }}>
-            <Image
-              style={{ borderRadius: 40 }}
-              mt={40}
-              sx={{
-                width: 400,
-                height: 400,
-                [phoneWidth]: { width: 300, height: 300 },
-                [tabletWidth]: { width: 300, height: 300 },
-              }}
-              src={`${getEnvironmentUrl()}/api/chart?configs={%20%20%22type%22:%20%22pie%22,%20%20%22data%22:%20{%20%20%20%20%22labels%22:%20[%20%20%20%20%20%20%22Googling%20errors%22,%20%20%20%20%20%20%22Learning%20tools%20they%27ll%20never%20use%22,%20%20%20%20%20%20%22Stack%20overflow%22,%20%20%20%20%20%20%22Retrying%20failed%20builds%22,%20%20%20%20%20%20%22Writing%20meaningful%20code%22%20%20%20%20],%20%20%20%20%22datasets%22:%20[%20%20%20%20%20%20{%20%20%20%20%20%20%20%20%22data%22:%20[%20%20%20%20%20%20%20%20%20%20100,%20%20%20%20%20%20%20%20%20%2050,%20%20%20%20%20%20%20%20%20%20250,%20%20%20%20%20%20%20%20%20%2075,%20%20%20%20%20%20%20%20%20%205%20%20%20%20%20%20%20%20],%20%20%20%20%20%20%20%20%22backgroundColor%22:%20[%20%20%20%20%20%20%20%20%20%20%22rgb(255,%2099,%20132)%22,%20%20%20%20%20%20%20%20%20%20%22rgb(54,%20162,%20235)%22,%20%20%20%20%20%20%20%20%20%20%22rgb(255,%20205,%2086)%22,%20%20%20%20%20%20%20%20%20%20%22rgb(0,125,82)%22,%20%20%20%20%20%20%20%20%20%20%22purple%22%20%20%20%20%20%20%20%20],%20%20%20%20%20%20%20%20%22hoverOffset%22:%204%20%20%20%20%20%20}%20%20%20%20]%20%20},%20%20%22options%22:%20{%20%20%20%20%22plugins%22:%20{%20%20%20%20%20%20%22title%22:%20{%20%20%20%20%20%20%20%20%22display%22:%20true,%20%20%20%20%20%20%20%20%22text%22:%20%22A%20developer%27s%20allocation%20of%20time%22%20%20%20%20%20%20}%20%20%20%20}%20%20}}`}
-            />
+              <Box mb="auto" sx={{ width: "500px", height: "500px" }}>
+                <Title order={2} sx={{ color: "white", height: "50px" }}>
+                  Try it yourself
+                </Title>
+                <JsonInput
+                  defaultValue={pieChartConfig}
+                  validationError="Invalid json"
+                  formatOnBlur
+                  // autosize
+                  onChange={(e) => setPieChartConfig(e)}
+                  minRows={25}
+                  sx={{ height: "450px" }}
+                />
+              </Box>
+              <ArrowNarrowRight size={90} strokeWidth={2} color={"white"} />
+              <Center sx={{ flexDirection: "column" }}>
+                <Box
+                  color="white"
+                  sx={{
+                    overflow: "scroll",
+                    [phoneWidth]: {
+                      width: "75%",
+                    },
+                    [tabletWidth]: {
+                      width: "75%",
+                    },
+                    [laptopWidth]: {
+                      width: "500px",
+                      height: "50px",
+                    },
+                    [monitorWidth]: {
+                      width: "500px",
+                      height: "50px",
+                    },
+                  }}
+                >
+                  Chart URL:{" "}
+                  <Link
+                    isExternal
+                    color="blue.500"
+                    href={`${getEnvironmentUrl()}/api/chart?configs=${pieChartConfig}`}
+                  >{`${getEnvironmentUrl()}/api/chart?configs=${pieChartConfig.replaceAll(
+                    "\n",
+                    ""
+                  )}`}</Link>
+                </Box>
+                <Image
+                  style={{ borderRadius: 40 }}
+                  sx={{
+                    width: 500,
+                    height: 500,
+                    [phoneWidth]: { width: 300, height: 300 },
+                    [tabletWidth]: { width: 300, height: 300 },
+                  }}
+                  src={`${getEnvironmentUrl()}/api/chart?configs=${pieChartConfig}`}
+                />
+              </Center>
+            </Center>
             <Heading
-              mt="5%"
+              mt="1%"
               color="white"
               fontWeight="extrabold"
               textAlign="center"
@@ -131,13 +264,91 @@ const FeatureSection = () => {
               Multiple chart types
             </Heading>
           </Center>
-          {/* <Plus size={100} strokeWidth={2} color={"white"} />
-          <Center sx={{ flexDirection: "column", marginTop: 30 }}>
-            <Code sx={{ margin: "0 auto", width: "60%" }} lang="javascript">
-              {`<img src='${getEnvironmentUrl()}/api/chart?configs={"type":"bar","data":{"labels":["April","May","June","July"],"datasets":[{"label":"Premium written (million)","data":[0.2,0.3,0.6,1.8],"backgroundColor":["black","orange%22]}]}}' />`}
-            </Code>
+        </Center> */}
+        {/* <Center sx={{ gap: 30, flexDirection: "column" }}>
+          <Center sx={{ flexDirection: "row", gap: 20 }} mt={100}>
+            <Image
+              style={{ borderRadius: 40 }}
+              sx={{
+                width: 500,
+                height: 500,
+                [phoneWidth]: { width: 300, height: 300 },
+                [tabletWidth]: { width: 300, height: 300 },
+              }}
+              src={`${getEnvironmentUrl()}/api/chart?configs={%22type%22:%22line%22,%22data%22:{%22labels%22:[%222001%22,%222002%22,%222003%22,%222004%22,%222005%22,%222006%22,%222007%22,%222008%22],%22datasets%22:[{%22label%22:%22Searches%20Made%20(billion)%22,%22data%22:[27.4,41,61.3,86.1,141,230.9,372,584.47],%22backgroundColor%22:[%22green%22,%22blue%22,%22red%22,%22yellow%22]}]}}&img=https://api.time.com/wp-content/uploads/2015/09/2003.jpg`}
+            />
+          </Center>
+
+          <Center sx={{ flexDirection: "column" }} mt={40}>
+            <Center
+              sx={{
+                flexDirection: "row",
+                [tabletWidth]: { flexDirection: "column" },
+                [phoneWidth]: { flexDirection: "column" },
+                gap: 10,
+              }}
+            >
+              <Box mb="auto" sx={{ width: "500px", height: "500px" }}>
+                <Title order={2} sx={{ color: "white", height: "50px" }}>
+                  Try it yourself
+                </Title>
+                <JsonInput
+                  defaultValue={barGraphConfigs}
+                  validationError="Invalid json"
+                  formatOnBlur
+                  // autosize
+                  onChange={(e) => setBarGraphConfigs(e)}
+                  minRows={25}
+                  sx={{ height: "450px" }}
+                />
+              </Box>
+              <ArrowNarrowRight size={90} strokeWidth={2} color={"white"} />
+
+              <Center sx={{ flexDirection: "column" }}>
+                <Box
+                  color="white"
+                  sx={{
+                    overflow: "scroll",
+                    [phoneWidth]: {
+                      width: "75%",
+                    },
+                    [tabletWidth]: {
+                      width: "75%",
+                    },
+                    [laptopWidth]: {
+                      width: "500px",
+                      height: "50px",
+                    },
+                    [monitorWidth]: {
+                      width: "500px",
+                      height: "50px",
+                    },
+                  }}
+                >
+                  Chart URL:{" "}
+                  <Link
+                    isExternal
+                    color="blue.500"
+                    href={`${getEnvironmentUrl()}/api/chart?configs=${barGraphConfigs}`}
+                  >{`${getEnvironmentUrl()}/api/chart?configs=${barGraphConfigs.replaceAll(
+                    "\n",
+                    ""
+                  )}`}</Link>
+                </Box>
+                <Image
+                  style={{ borderRadius: 40 }}
+                  sx={{
+                    width: 500,
+                    height: 500,
+                    [phoneWidth]: { width: 300, height: 300 },
+                    [tabletWidth]: { width: 300, height: 300 },
+                  }}
+                  src={`${getEnvironmentUrl()}/api/chart?configs=${barGraphConfigs}`}
+                />
+              </Center>
+            </Center>
             <Heading
-              mt="2%"
+              mt="1%"
               color="white"
               fontWeight="extrabold"
               textAlign="center"
@@ -147,9 +358,80 @@ const FeatureSection = () => {
               size="lg"
               // fontSize={["3xl", "3xl", "4xl", "4xl", "4xl", "4xl"]}
             >
-              In-app usage
+              Multiple chart types
             </Heading>
-          </Center> */}
+          </Center>
+        </Center> */}
+        <Center sx={{ gap: 30, flexDirection: "column" }}>
+          <Center sx={{ flexDirection: "column" }} mt={20}>
+            <Center
+              sx={{
+                flexDirection: "row",
+                [tabletWidth]: { flexDirection: "column" },
+                [phoneWidth]: { flexDirection: "column" },
+                gap: 10,
+              }}
+            >
+              <Box mb="auto" sx={{ width: "500px", height: "500px" }}>
+                <Title order={2} sx={{ color: "white", height: "50px" }}>
+                  Try it yourself
+                </Title>
+                <JsonInput
+                  defaultValue={barGraphConfigs}
+                  validationError="Invalid json"
+                  formatOnBlur
+                  // autosize
+                  onChange={(e) => setBarGraphConfigs(e)}
+                  minRows={25}
+                  sx={{ height: "450px" }}
+                />
+              </Box>
+              <ArrowNarrowRight size={90} strokeWidth={2} color={"white"} />
+              {/* <ArrowRight size={90} strokeWidth={3} color={"white"} /> */}
+              <Center sx={{ flexDirection: "column" }}>
+                <Box
+                  color="white"
+                  sx={{
+                    overflow: "scroll",
+                    [phoneWidth]: {
+                      width: "75%",
+                    },
+                    [tabletWidth]: {
+                      width: "75%",
+                    },
+                    [laptopWidth]: {
+                      width: "500px",
+                      height: "50px",
+                    },
+                    [monitorWidth]: {
+                      width: "500px",
+                      height: "50px",
+                    },
+                  }}
+                >
+                  Chart URL:{" "}
+                  <Link
+                    isExternal
+                    color="blue.500"
+                    href={`${getEnvironmentUrl()}/api/chart?configs=${barGraphConfigs}`}
+                  >{`${getEnvironmentUrl()}/api/chart?configs=${barGraphConfigs.replaceAll(
+                    "\n",
+                    ""
+                  )}`}</Link>
+                </Box>
+                <Image
+                  style={{ borderRadius: 40 }}
+                  sx={{
+                    width: 500,
+                    height: 500,
+                    [phoneWidth]: { width: 300, height: 300 },
+                    [tabletWidth]: { width: 300, height: 300 },
+                  }}
+                  src={`${getEnvironmentUrl()}/api/chart?configs=${barGraphConfigs}`}
+                />
+              </Center>
+            </Center>
+          </Center>
         </Center>
       </Center>
     </Box>
