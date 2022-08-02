@@ -63,7 +63,7 @@ const FeatureSection = () => {
                 [phoneWidth]: { width: 300, height: 300 },
                 [tabletWidth]: { width: 300, height: 300 },
               }}
-              src={`${getEnvironmentUrl()}/api/chart?configs={%22type%22:%22line%22,%22data%22:{%22labels%22:[%222001%22,%222002%22,%222003%22,%222004%22,%222005%22,%222006%22,%222007%22,%222008%22],%22datasets%22:[{%22label%22:%22Searches%20Made%20(billion)%22,%22data%22:[27.4,41,61.3,86.1,141,230.9,372,584.47],%22backgroundColor%22:[%22green%22,%22blue%22,%22red%22,%22yellow%22]}]}}&img=https://cdn.vox-cdn.com/thumbor/Pkmq1nm3skO0-j693JTMd7RL0Zk=/0x0:2012x1341/1200x800/filters:focal(0x0:2012x1341)/cdn.vox-cdn.com/uploads/chorus_image/image/47070706/google2.0.0.jpg`}
+              src={`${getEnvironmentUrl()}/api/chart?configs={%22type%22:%22line%22,%22data%22:{%22labels%22:[%222001%22,%222002%22,%222003%22,%222004%22,%222005%22,%222006%22,%222007%22,%222008%22],%22datasets%22:[{%22label%22:%22Searches%20Made%20(billion)%22,%22data%22:[27.4,41,61.3,86.1,141,230.9,372,584.47],%22backgroundColor%22:[%22green%22,%22blue%22,%22red%22,%22yellow%22]}]}}&img=https://api.time.com/wp-content/uploads/2015/09/2003.jpg`}
             />
             <Heading
               mt="5%"
