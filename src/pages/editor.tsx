@@ -111,7 +111,7 @@ const LiveEditor = () => {
         mt={10}
         onChange={(e) => setBackgroundColor(e.target.value)}
         label="Background color"
-        placeholder="e.g. 'red' or hexcode without '#' (1720CB)"
+        placeholder="'red' or hexcode without '#' (e.g. '1720CB')"
         // {...form.getInputProps("backgroundColor")}
       />
 

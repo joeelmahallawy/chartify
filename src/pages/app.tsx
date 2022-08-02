@@ -1,3 +1,8 @@
+import {
+  GetServerSidePropsContext,
+  GetServerSidePropsResult,
+  Redirect,
+} from "next";
 import React, { useEffect, useState } from "react";
 import ChartCreator from "../components/Layouts/ChartCreator";
 import Docs from "../components/Layouts/Docs";
@@ -22,5 +27,10 @@ const AppPage = () => {
   //     {pages.savedcharts && <MyCharts />}
   //   </Page>
   // );
+};
+export const getServerSideProps = (
+  ctx: GetServerSidePropsContext
+): GetServerSidePropsResult<Redirect> => {
+  return { redirect: { destination: "/editor", statusCode: 301 } };
 };
 export default AppPage;
