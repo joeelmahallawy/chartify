@@ -391,22 +391,26 @@ const FeatureSection = () => {
               <Center sx={{ flexDirection: "column" }}>
                 <Box
                   color="white"
-                  sx={{
-                    overflow: "scroll",
-                    [phoneWidth]: {
-                      width: "75%",
-                    },
-                    [tabletWidth]: {
-                      width: "75%",
-                    },
-                    [laptopWidth]: {
-                      width: "500px",
-                      height: "50px",
-                    },
-                    [monitorWidth]: {
-                      width: "500px",
-                      height: "50px",
-                    },
+                  style={{
+                    width: "500px",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+
+                    // [phoneWidth]: {
+                    //   width: "75%",
+                    // },
+                    // [tabletWidth]: {
+                    //   width: "75%",
+                    // },
+                    // [laptopWidth]: {
+                    //   width: "500px",
+                    //   height: "50px",
+                    // },
+                    // [monitorWidth]: {
+                    //   width: "500px",
+                    //   height: "50px",
+                    // },
                   }}
                 >
                   Chart URL:{" "}

@@ -146,9 +146,9 @@ const HomePageHeader = () => {
         </ChakraCenter>
       </>
 
-      <Box display={["block", "block", "none", "none", "none", "none"]}>
+      {/* <Box display={["block", "block", "none", "none", "none", "none"]}>
         <Hamburger />
-      </Box>
+      </Box> */}
     </Center>
   );
 };
